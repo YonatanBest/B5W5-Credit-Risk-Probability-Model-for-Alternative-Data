@@ -8,7 +8,8 @@ import mlflow
 import joblib
 from data_processing import build_feature_pipeline, process_data
 
-def main():
+
+def main(): 
     # Load processed data
     df = pd.read_csv('data/processed/processed_data.csv')
     processed_df = process_data(df)
@@ -26,12 +27,12 @@ def main():
     X_test_trans = pipeline.transform(X_test)
     # Train models
     models = {
-        'logreg': LogisticRegression(max_iter=1000),
+        'logreg': LogisticRegression(max_iter=1000), 
         'rf': RandomForestClassifier(n_estimators=100, random_state=42)
     }
     best_model = None
     best_auc = 0
-    for name, model in models.items():
+    for name, model in models.items(): 
         model.fit(X_train_trans, y_train)
         y_pred = model.predict(X_test_trans)
         y_prob = model.predict_proba(X_test_trans)[:, 1]
@@ -50,5 +51,8 @@ def main():
     joblib.dump(pipeline, 'data/processed/feature_pipeline.joblib')
     print('Best model saved.')
 
-if __name__ == '__main__':
-    main() 
+
+if __name__ == '__main__': 
+    main()
+
+    
