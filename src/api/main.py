@@ -5,6 +5,7 @@ import joblib
 
 app = FastAPI()
 
+
 @app.post('/predict', response_model=PredictResponse)
 def predict(request: PredictRequest):
     # Convert request to DataFrame

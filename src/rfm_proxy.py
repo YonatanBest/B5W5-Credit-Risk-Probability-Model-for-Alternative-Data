@@ -22,8 +22,14 @@ def assign_high_risk(rfm):
     clusters = kmeans.fit_predict(rfm_scaled)
     rfm['Cluster'] = clusters
     # High risk: cluster with highest Recency, lowest Frequency & Monetary
-    cluster_stats = rfm.groupby('Cluster').agg({'Recency': 'mean', 'Frequency': 'mean', 'Monetary': 'mean'})
-    high_risk_cluster = cluster_stats.sort_values(['Recency', 'Frequency', 'Monetary'], ascending=[False, True, True]).index[0]
+    cluster_stats = rfm.groupby('Cluster').agg({
+        'Recency': 'mean',
+        'Frequency': 'mean',
+        'Monetary': 'mean'
+    })
+    high_risk_cluster = cluster_stats.sort_values(
+        ['Recency', 'Frequency', 'Monetary'], ascending=[False, True, True]
+    ).index[0]
     rfm['is_high_risk'] = (rfm['Cluster'] == high_risk_cluster).astype(int)
     return rfm[['CustomerId', 'is_high_risk']]
 
@@ -38,7 +44,6 @@ def main():
     df = df.merge(risk_labels, on='CustomerId', how='left')
     os.makedirs('data/processed', exist_ok=True)
     df.to_csv('data/processed/processed_data.csv', index=False)
-
 
 if __name__ == '__main__':
     main()
