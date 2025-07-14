@@ -14,7 +14,6 @@ def extract_time_features(df):
     return df
 
 
-
 def aggregate_customer_features(df):
     agg_funcs = {
         'Amount': ['sum', 'mean', 'std', 'count'],
@@ -31,7 +30,6 @@ def aggregate_customer_features(df):
     return customer_df
 
 
-
 def build_feature_pipeline(numeric_features, categorical_features):
     numeric_transformer = Pipeline([
         ('imputer', SimpleImputer(strategy='median')),
@@ -46,7 +44,6 @@ def build_feature_pipeline(numeric_features, categorical_features):
         ('cat', categorical_transformer, categorical_features)
     ])
     return preprocessor
-
 
 
 def process_data(raw_df):
