@@ -6,7 +6,7 @@ import joblib
 app = FastAPI()
 
 @app.post('/predict', response_model=PredictResponse)
-def predict(request: PredictRequest): 
+def predict(request: PredictRequest):
     # Convert request to DataFrame
     input_df = pd.DataFrame([request.dict()])
     # Load model and pipeline

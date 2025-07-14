@@ -1,6 +1,7 @@
 import joblib
 
-def predict(input_data): 
+
+def predict(input_data):
     # Load model and pipeline
     model = joblib.load('data/processed/best_model.joblib')
     pipeline = joblib.load('data/processed/feature_pipeline.joblib')
