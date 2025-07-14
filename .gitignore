@@ -1,0 +1,29 @@
+# Data
+/data/
+!/data/raw/
+!/data/processed/
+
+# Jupyter Notebooks
+*.ipynb_checkpoints
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environments
+.env
+.venv
+venv/
+ENV/
+
+# MLflow
+mlruns/
+
+# Docker
+*.db
+*.sqlite3
+
+# VSCode
+.vscode/ 
