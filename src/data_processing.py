@@ -1,9 +1,9 @@
 import pandas as pd
-import numpy as np
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
+
 
 def extract_time_features(df):
     df['TransactionStartTime'] = pd.to_datetime(df['TransactionStartTime'])
@@ -12,6 +12,7 @@ def extract_time_features(df):
     df['transaction_month'] = df['TransactionStartTime'].dt.month
     df['transaction_year'] = df['TransactionStartTime'].dt.year
     return df
+
 
 def aggregate_customer_features(df):
     agg_funcs = {
@@ -28,6 +29,7 @@ def aggregate_customer_features(df):
     customer_df = customer_df.reset_index()
     return customer_df
 
+
 def build_feature_pipeline(numeric_features, categorical_features):
     numeric_transformer = Pipeline([
         ('imputer', SimpleImputer(strategy='median')),
@@ -43,6 +45,7 @@ def build_feature_pipeline(numeric_features, categorical_features):
     ])
     return preprocessor
 
+
 def process_data(raw_df):
     df = extract_time_features(raw_df)
     customer_df = aggregate_customer_features(df)
@@ -50,4 +53,5 @@ def process_data(raw_df):
     if 'is_high_risk' in df.columns:
         risk = df[['CustomerId', 'is_high_risk']].drop_duplicates()
         customer_df = customer_df.merge(risk, on='CustomerId', how='left')
-    return customer_df 
+    return customer_df
+

@@ -1,4 +1,3 @@
-import pytest
 import pandas as pd
 from src.data_processing import build_feature_pipeline, extract_time_features, process_data
 
